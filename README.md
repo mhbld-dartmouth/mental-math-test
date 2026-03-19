@@ -46,7 +46,9 @@ Questions cover addition, subtraction, multiplication, division, squares, percen
 
 ## 🔬 Research Context
 
-This assessment is part of research conducted at the **Media and Health Behaviors Lab** at Dartmouth's Geisel School of Medicine, led by **PI: Diane Gilbert-Diamond**.
+This assessment is part of research conducted at the **Media and Health Behaviors Lab** at Dartmouth's Geisel School of Medicine, led by 
+
+*PI: Diane Gilbert-Diamond*.
 
 *Developer: Yashaswini Rajendra Bhat*
 
