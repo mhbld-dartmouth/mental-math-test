@@ -6,6 +6,7 @@
 ![Media & Health Behaviors Lab](https://img.shields.io/badge/Media%20%26%20Health%20Behaviors%20Lab-00693E?style=for-the-badge)
 
 **A timed mental arithmetic assessment**
+
 *Developed by the Media and Health Behaviors Lab, Dartmouth Geisel School of Medicine*
 
 ---
