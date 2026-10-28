@@ -8,15 +8,15 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #101418;
-      --panel: #181e23;
-      --panel2: #202830;
-      --line: #354049;
-      --text: #f2f2ed;
-      --muted: #a7b0b4;
-      --dim: #7f8b92;
-      --signal: #e9b65b;
-      --red: #f16f68;
+      --bg: #181d1e;
+      --panel: #222829;
+      --panel2: #2b3333;
+      --line: #45504d;
+      --text: #f2f0e9;
+      --muted: #b9c1bc;
+      --dim: #a1aaa5;
+      --signal: #a8bbad;
+      --red: #cf8b85;
       --paper: #f6f5f0;
     }
     *, *::before, *::after { box-sizing: border-box; }
@@ -24,10 +24,10 @@
     body { margin:0; min-width:320px; min-height:100vh; background:var(--bg); color:var(--text); font: 16px/1.5 Arial, Helvetica, sans-serif; }
     button, input { font:inherit; }
     a { color:var(--signal); text-underline-offset:4px; overflow-wrap:anywhere; }
-    a:hover { color:#f9d18a; }
+    a:hover { color:#d1ddd4; }
     :focus-visible { outline:3px solid var(--signal); outline-offset:4px; }
     [hidden] { display:none !important; }
-    .site-header { border-bottom:1px solid var(--line); background:#13191e; }
+    .site-header { border-bottom:1px solid var(--line); background:#1c2223; }
     .header-inner { max-width:1240px; margin:0 auto; min-height:80px; padding:17px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
     .site-label { max-width:55%; color:var(--text); font-size:17px; line-height:1.3; font-weight:700; letter-spacing:-.015em; }
     .site-label:before { content:''; display:inline-block; vertical-align:-2px; width:7px; height:18px; background:var(--signal); margin-right:12px; }
@@ -57,7 +57,7 @@
     .instructions p { color:var(--muted); margin:0 0 12px; max-width:640px; }
     .instructions strong { color:var(--text); }
     .primary { display:inline-flex; justify-content:center; align-items:center; min-height:58px; min-width:245px; border:2px solid var(--signal); background:var(--signal); color:#11171b; font-weight:800; font-size:15px; letter-spacing:.025em; padding:14px 28px; cursor:pointer; border-radius:2px; }
-    .primary:hover { background:#ffd082; border-color:#ffd082; }
+    .primary:hover { background:#bfcec3; border-color:#bfcec3; }
     .secondary { display:inline-flex; align-items:center; justify-content:center; padding:12px 20px; min-height:48px; border:1px solid var(--line); background:var(--panel); color:var(--text); border-radius:2px; cursor:pointer; }
     .secondary:hover { background:var(--panel2); border-color:var(--signal); }
     .start-row { margin:26px 0 14px; }
@@ -82,20 +82,20 @@
     .time-label { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.13em; font-weight:800; }
     .timer { font:800 clamp(40px,4vw,60px)/1.2 Arial, Helvetica,sans-serif; letter-spacing:-.06em; font-variant-numeric:tabular-nums; color:var(--text); white-space:nowrap; margin-top:5px; }
     .timer.warning { color:var(--red); }
-    .time-module.final { border-top-color:var(--red); background:#2b2022; }
-    .time-module.final .time-label { color:#f3b1ac; }
+    .time-module.final { border-top-color:var(--red); background:#322629; }
+    .time-module.final .time-label { color:#e2ada6; }
     .sound-button { display:block; margin:12px 0 0 auto; padding:2px 0; color:var(--muted); background:none; border:0; font-size:12px; cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
     .sound-button:hover { color:var(--text); }
-    .progress-track { height:7px; width:100%; background:#2d353b; margin:0 0 35px; overflow:hidden; }
+    .progress-track { height:7px; width:100%; background:#323a39; margin:0 0 35px; overflow:hidden; }
     .progress-fill { height:100%; width:0; background:var(--signal); transition:width .14s ease; }
     .challenge-panel { border:1px solid var(--line); background:var(--panel); padding:clamp(28px,4.2vw,52px); }
     .prompt { color:var(--muted); text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700; margin-bottom:22px; }
     .problem { font:700 clamp(42px,6vw,78px)/1.18 Georgia, 'Times New Roman', serif; color:var(--text); margin:0 0 34px; letter-spacing:-.04em; overflow-wrap:anywhere; }
     .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; }
-    .option { display:flex; align-items:center; gap:20px; min-height:92px; text-align:left; background:#222b32; color:var(--text); border:1px solid #48565e; border-radius:2px; padding:18px 21px; cursor:pointer; transition:background .1s,border-color .1s; }
-    .option:hover { border-color:var(--signal); background:#2d3941; }
-    .option:active { background:#37434b; }
-    .option-key { flex:none; width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; border:1px solid #627077; color:var(--signal); }
+    .option { display:flex; align-items:center; gap:20px; min-height:92px; text-align:left; background:#2b3333; color:var(--text); border:1px solid #56615d; border-radius:2px; padding:18px 21px; cursor:pointer; transition:background .1s,border-color .1s; }
+    .option:hover { border-color:var(--signal); background:#35403d; }
+    .option:active { background:#3d4745; }
+    .option-key { flex:none; width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; border:1px solid #697770; color:var(--signal); }
     .option-value { font-size:clamp(25px,2.4vw,34px); font-weight:700; font-variant-numeric:tabular-nums; }
     .test-foot { margin-top:20px; display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap; }
     .test-foot p { margin:0; font-size:13px; color:var(--muted); }
@@ -158,15 +158,15 @@
     .brand-identity { display:flex; align-items:center; min-width:0; gap:13px; }
     .brand-shield { display:block; flex:none; width:48px; height:52px; object-fit:contain; padding:5px; background:#fff; border:1px solid #d9e1de; }
     .brand-copy { display:flex; flex-direction:column; gap:2px; min-width:0; }
-    .brand-school { color:#b7cabd; font-size:11px; line-height:1.25; font-weight:700; text-transform:uppercase; letter-spacing:.095em; }
+    .brand-school { color:#becbc1; font-size:11px; line-height:1.25; font-weight:700; text-transform:uppercase; letter-spacing:.095em; }
     .brand-copy .site-label { max-width:none; font-size:17px; font-weight:700; }
     .brand-copy .site-label:before { display:none; }
     .lab-label { max-width:310px; }
-    .campus-banner { position:relative; overflow:hidden; margin:-16px 0 48px; height:clamp(190px,21vw,265px); background:#19322e; border:1px solid #41534d; }
+    .campus-banner { position:relative; overflow:hidden; margin:-16px 0 48px; height:clamp(190px,21vw,265px); background:#27342f; border:1px solid #56635c; }
     .campus-banner::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg, rgba(9,19,22,.77) 0%, rgba(9,19,22,.38) 55%, rgba(9,19,22,.08) 100%); pointer-events:none; }
-    .campus-banner img { display:block; height:100%; width:100%; object-fit:cover; object-position:center 48%; filter:brightness(.80) saturate(.74); }
-    .campus-label { position:absolute; z-index:1; left:clamp(24px,4vw,50px); bottom:clamp(22px,3vw,38px); max-width:480px; }
-    .campus-label .campus-overline { margin:0 0 9px; color:#e2e8e1; font-size:11px; letter-spacing:.16em; font-weight:800; text-transform:uppercase; }
+    .campus-banner img { display:block; height:100%; width:100%; object-fit:cover; object-position:center 48%; filter:brightness(.88) saturate(.82); }
+    .campus-label { position:absolute; z-index:1; left:clamp(24px,4vw,50px); bottom:clamp(22px,3vw,38px); max-width:480px; padding:10px 14px; background:rgba(20,28,28,.62); }
+    .campus-label .campus-overline { margin:0; color:#e2e8e1; font-size:11px; letter-spacing:.16em; font-weight:800; text-transform:uppercase; }
     .campus-label strong { display:block; color:#fff; font:700 clamp(23px,3.1vw,40px)/1.14 Georgia, 'Times New Roman', serif; letter-spacing:-.018em; }
     .brand-citation { font-size:11px; color:#b1bdbc; margin-top:7px; }
     @media(max-width:620px) {
@@ -194,14 +194,14 @@
     <section id="intro-screen" aria-labelledby="intro-title">
       <div class="campus-banner" aria-label="Photograph of Baker Tower at Dartmouth College">
         <img src="https://home.dartmouth.edu/sites/home/files/styles/max_width_720px/public/2022-01/20210104-Campus_Drone-RG-009-sharpened.jpg.webp?itok=efBCafly" alt="Baker Tower and Dartmouth campus in winter" loading="eager">
-        <div class="campus-label"><p class="campus-overline">Media and Health Behaviors Lab</p><strong>Five minutes. Stay focused.</strong></div>
+        <div class="campus-label"><p class="campus-overline">Geisel School of Medicine at Dartmouth</p></div>
       </div>
       <div class="intro">
         <div class="hero-copy">
-          <div class="eyebrow">Timed cognitive task / Mental arithmetic</div>
+          <div class="eyebrow">Online assessment</div>
           <h1 id="intro-title">Mental Math Assessment</h1>
-          <p class="lead">Five minutes. One hundred questions. Work as quickly and accurately as you can.</p>
-          <p class="sublead">The clock will not pause once the assessment begins. Unanswered questions do not affect your score.</p>
+          <p class="lead">A five minute arithmetic task. Answer as many questions as you can before the time runs out.</p>
+          
         </div>
         <div class="hero-clock" aria-label="Assessment time limit is five minutes">
           <span class="hero-caption">Time available</span>
@@ -216,13 +216,13 @@
           <div class="fact"><span class="fact-value">4</span><span class="fact-label">Choices per question</span></div>
         </div>
         <div class="instructions">
-          <h2>Before you begin</h2>
-          <p>Questions include addition, subtraction, multiplication, division, squares, percentages and mixed arithmetic.</p>
-          <p><strong>Correct: +1 point. Incorrect: −1 point. Unanswered: 0 points.</strong></p>
-          <p>Choose an answer with your mouse or use <strong>A, B, C, D</strong> or <strong>1, 2, 3, 4</strong> on your keyboard. You may skip any question.</p>
+          <h2>Instructions</h2>
+          <p>Questions cover addition, subtraction, multiplication, division, squares, percentages and mixed arithmetic.</p>
+          <p>Select one answer for each question. Correct answers receive <strong>+1 point</strong>, incorrect answers receive <strong>−1 point</strong> and unanswered questions receive <strong>0 points</strong>.</p>
+          <p>Use the mouse or keyboard keys <strong>A, B, C, D</strong> or <strong>1, 2, 3, 4</strong> to choose an answer. You can skip a question without penalty.</p>
           <label class="sound-setting"><input type="checkbox" id="sound-enabled" checked> Play ticking sounds during the final 20 seconds</label>
           <div class="start-row"><button class="primary" id="start-button" type="button">Start assessment</button></div>
-          <p class="small-note">Press Start only when you are ready. The five minute countdown begins immediately.</p>
+          <p class="small-note">The countdown begins when you select Start assessment.</p>
         </div>
       </div>
     </section>
