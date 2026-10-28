@@ -7,138 +7,248 @@
   <title>Mental Math Assessment | Dartmouth</title>
   <style>
     :root {
-      color-scheme: light;
-      --green: #00693e;
-      --green-dark: #004e2e;
-      --ink: #252b29;
-      --muted: #59635e;
-      --line: #d9ded9;
-      --paper: #fbfbf9;
-      --white: #ffffff;
+      color-scheme: dark;
+      --bg: #101418;
+      --panel: #181e23;
+      --panel2: #202830;
+      --line: #354049;
+      --text: #f2f2ed;
+      --muted: #a7b0b4;
+      --dim: #7f8b92;
+      --signal: #e9b65b;
+      --red: #f16f68;
+      --paper: #f6f5f0;
     }
     *, *::before, *::after { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.55; }
-    a { color: var(--green-dark); text-underline-offset: 3px; }
-    a:hover { text-decoration-thickness: 2px; }
-    button { font: inherit; }
-    button:focus-visible, a:focus-visible { outline: 3px solid #8aae94; outline-offset: 3px; }
-    .site-header { background: var(--white); border-bottom: 4px solid var(--green); }
-    .header-inner { max-width: 960px; margin: 0 auto; padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .site-label { color: var(--green-dark); font-weight: 700; font-size: 15px; letter-spacing: .01em; }
-    .lab-label { color: var(--muted); font-size: 13px; text-align: right; }
-    .container { max-width: 840px; margin: 0 auto; padding: 48px 24px 60px; }
-    h1, h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 500; line-height: 1.15; }
-    h1 { font-size: clamp(34px, 5.5vw, 48px); letter-spacing: -.025em; margin: 0 0 18px; }
-    h2 { font-size: 27px; margin: 0 0 16px; }
-    h3 { font-size: 16px; font-weight: 700; margin: 0 0 10px; }
-    p { margin: 0 0 16px; }
-    .eyebrow { text-transform: uppercase; letter-spacing: .14em; color: var(--green-dark); font-size: 11px; font-weight: 700; margin-bottom: 16px; }
-    .lead { font-size: 18px; max-width: 620px; color: #454e49; }
-    .intro { padding-bottom: 32px; border-bottom: 1px solid var(--line); }
-    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 30px 0 32px; }
-    .fact { padding: 18px 16px 18px 0; }
-    .fact + .fact { padding-left: 22px; border-left: 1px solid var(--line); }
-    .fact-value { display: block; font-size: 23px; font-weight: 700; color: var(--green-dark); }
-    .fact-label { font-size: 12px; color: var(--muted); }
-    .instructions { max-width: 670px; padding-bottom: 8px; }
-    .instructions p { margin: 0 0 10px; }
-    .primary { background: var(--green); border: 1px solid var(--green); border-radius: 4px; color: white; font-weight: 700; min-width: 170px; padding: 12px 22px; cursor: pointer; }
-    .primary:hover { background: var(--green-dark); }
-    .secondary { background: white; color: var(--green-dark); border: 1px solid var(--line); border-radius: 4px; cursor: pointer; padding: 9px 16px; }
-    .secondary:hover { border-color: var(--green); background: #f5f9f5; }
-    .start-row { margin-top: 25px; }
-    .small-note { font-size: 13px; color: var(--muted); margin-top: 11px; }
-    .resources { margin-top: 52px; padding-top: 26px; border-top: 1px solid var(--line); font-size: 14px; }
-    .resources h2 { font-family: Arial, Helvetica, sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 14px; }
-    .resource-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 22px; }
-    .citation { border-left: 3px solid var(--green); padding: 7px 0 7px 18px; margin: 16px 0 0; color: #424b46; }
-    .citation p { margin: 0 0 10px; }
-    .meta { color: var(--muted); font-size: 13px; margin: 20px 0 0; }
-    .site-footer { max-width: 960px; margin: 0 auto; padding: 20px 24px 30px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
-    [hidden] { display: none !important; }
-    .test-head { display: flex; gap: 24px; justify-content: space-between; align-items: flex-start; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
-    .test-head h1 { font-size: 32px; margin-bottom: 4px; }
-    .progress-label { font-size: 13px; color: var(--muted); }
-    .timer { font-variant-numeric: tabular-nums; font-size: 26px; font-weight: 700; white-space: nowrap; color: var(--green-dark); }
-    .timer.warning { color: #9c4128; }
-    .progress-track { height: 4px; background: #e4e8e3; margin: 0 0 42px; }
-    .progress-fill { background: var(--green); height: 100%; width: 0; transition: width .12s; }
-    .prompt { margin: 0 0 12px; font-size: 15px; color: var(--muted); }
-    .problem { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(31px, 6vw, 46px); font-weight: 500; line-height: 1.2; margin: 0 0 32px; }
-    .options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 620px; }
-    .option { display: flex; align-items: center; gap: 18px; text-align: left; border: 1px solid #bac7bf; background: var(--white); color: var(--ink); border-radius: 4px; min-height: 74px; padding: 14px 17px; cursor: pointer; }
-    .option:hover { border-color: var(--green); background: #f4f8f5; }
-    .option-key { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 30px; width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 3px; font-size: 13px; font-weight: 700; color: var(--green-dark); }
-    .option-value { font-size: 23px; font-variant-numeric: tabular-nums; }
-    .test-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 28px; max-width: 620px; }
-    .test-foot p { margin: 0; font-size: 13px; color: var(--muted); }
-    .score-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 26px 0 34px; }
-    .score-cell { padding: 18px 14px; background: white; border: 1px solid var(--line); }
-    .score-cell strong { display: block; color: var(--green-dark); font-size: 28px; font-variant-numeric: tabular-nums; }
-    .score-cell span { display: block; font-size: 12px; color: var(--muted); }
-    .result-actions { margin: 24px 0 0; }
-    @media (max-width: 580px) {
-      .header-inner { padding: 18px 18px; }
-      .lab-label { display: none; }
-      .container { padding: 34px 18px 46px; }
-      .facts { grid-template-columns: 1fr 1fr 1fr; }
-      .fact { padding: 15px 8px 15px 0; }
-      .fact + .fact { padding-left: 10px; }
-      .fact-value { font-size: 20px; }
-      .options { grid-template-columns: 1fr; }
-      .option { min-height: 60px; }
-      .score-grid { grid-template-columns: 1fr 1fr; }
-      .test-head h1 { font-size: 27px; }
+    html { background: var(--bg); }
+    body { margin:0; min-width:320px; min-height:100vh; background:var(--bg); color:var(--text); font: 16px/1.5 Arial, Helvetica, sans-serif; }
+    button, input { font:inherit; }
+    a { color:var(--signal); text-underline-offset:4px; overflow-wrap:anywhere; }
+    a:hover { color:#f9d18a; }
+    :focus-visible { outline:3px solid var(--signal); outline-offset:4px; }
+    [hidden] { display:none !important; }
+    .site-header { border-bottom:1px solid var(--line); background:#13191e; }
+    .header-inner { max-width:1240px; margin:0 auto; min-height:80px; padding:17px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .site-label { max-width:55%; color:var(--text); font-size:17px; line-height:1.3; font-weight:700; letter-spacing:-.015em; }
+    .site-label:before { content:''; display:inline-block; vertical-align:-2px; width:7px; height:18px; background:var(--signal); margin-right:12px; }
+    .lab-label { color:var(--muted); text-align:right; font-size:13px; line-height:1.4; }
+    .container { width:min(100%,1240px); margin:0 auto; padding:64px 32px 86px; }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { font-family:Arial, Helvetica,sans-serif; font-weight:800; letter-spacing:-.047em; line-height:1.04; }
+    h2 { font-size:26px; line-height:1.15; letter-spacing:-.02em; }
+    h3 { font-size:15px; }
+    .eyebrow { color:var(--signal); letter-spacing:.17em; font-weight:800; font-size:11px; text-transform:uppercase; margin-bottom:16px; }
+    .intro { display:grid; grid-template-columns:minmax(0, 1.45fr) minmax(290px, .65fr); align-items:stretch; column-gap:clamp(28px,5vw,80px); padding-bottom:54px; border-bottom:1px solid var(--line); }
+    .intro h1 { font-size:clamp(50px,6.2vw,88px); max-width:720px; margin-bottom:24px; }
+    .intro .lead { color:var(--text); font-size:clamp(20px,2vw,25px); font-weight:400; line-height:1.45; max-width:630px; margin-bottom:18px; }
+    .intro .sublead { color:var(--muted); font-size:15px; max-width:480px; }
+    .hero-clock { border:1px solid var(--line); align-self:stretch; background:var(--panel); padding:30px; display:flex; flex-direction:column; justify-content:space-between; min-height:330px; position:relative; }
+    .hero-clock::before { content:''; position:absolute; left:0; top:0; right:0; height:5px; background:var(--signal); }
+    .hero-caption { font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; }
+    .hero-time { font-size:clamp(64px,7vw,96px); letter-spacing:-.07em; line-height:1; font-weight:800; font-variant-numeric:tabular-nums; white-space:nowrap; margin:28px 0; }
+    .hero-meta { color:var(--muted); font-size:14px; border-top:1px solid var(--line); padding-top:20px; }
+    .details-area { display:grid; grid-template-columns:minmax(240px,.72fr) minmax(0,1.28fr); gap:48px; padding:44px 0 0; }
+    .facts { display:grid; grid-template-columns:1fr; gap:0; align-content:start; }
+    .fact { padding:17px 0; display:flex; justify-content:space-between; align-items:baseline; gap:16px; border-bottom:1px solid var(--line); }
+    .fact:first-child { padding-top:0; }
+    .fact-value { font-size:26px; font-weight:800; color:var(--text); font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .fact-label { color:var(--muted); font-size:13px; text-align:right; }
+    .instructions h2 { margin-bottom:18px; }
+    .instructions p { color:var(--muted); margin:0 0 12px; max-width:640px; }
+    .instructions strong { color:var(--text); }
+    .primary { display:inline-flex; justify-content:center; align-items:center; min-height:58px; min-width:245px; border:2px solid var(--signal); background:var(--signal); color:#11171b; font-weight:800; font-size:15px; letter-spacing:.025em; padding:14px 28px; cursor:pointer; border-radius:2px; }
+    .primary:hover { background:#ffd082; border-color:#ffd082; }
+    .secondary { display:inline-flex; align-items:center; justify-content:center; padding:12px 20px; min-height:48px; border:1px solid var(--line); background:var(--panel); color:var(--text); border-radius:2px; cursor:pointer; }
+    .secondary:hover { background:var(--panel2); border-color:var(--signal); }
+    .start-row { margin:26px 0 14px; }
+    .small-note { color:var(--muted); font-size:13px; }
+    .sound-setting { display:flex; align-items:center; gap:10px; width:fit-content; padding:12px 0 3px; color:var(--muted); font-size:14px; cursor:pointer; }
+    .sound-setting input { accent-color:var(--signal); width:18px; height:18px; cursor:pointer; }
+    .resources { padding-top:36px; margin-top:72px; border-top:1px solid var(--line); }
+    .resources h2 { font-size:20px; font-weight:700; letter-spacing:0; margin-bottom:16px; }
+    .resource-links { display:flex; flex-wrap:wrap; gap:12px 28px; margin-bottom:30px; font-size:14px; }
+    .citation { padding:24px 26px; background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--signal); max-width:960px; }
+    .citation h3 { color:var(--text); margin:0 0 10px; }
+    .citation p { color:var(--muted); font-size:14px; line-height:1.65; max-width:860px; margin-bottom:15px; }
+    .citation .secondary { min-height:36px; font-size:13px; padding:8px 13px; }
+    .meta { margin-top:22px; font-size:12px; color:var(--dim); line-height:1.8; }
+    .site-footer { max-width:1240px; margin:0 auto; border-top:1px solid var(--line); padding:24px 32px 30px; color:var(--dim); font-size:12px; }
+    /* Active assessment: large, uncramped question and timer zones */
+    #test-screen { min-height:650px; }
+    .test-head { display:grid; grid-template-columns:minmax(0,1fr) minmax(190px,236px); gap:32px; align-items:start; margin-bottom:22px; }
+    .test-head h1 { font-size:clamp(30px,3.8vw,49px); margin:0 0 10px; letter-spacing:-.04em; }
+    .progress-label { color:var(--muted); font-size:14px; }
+    .time-module { border:1px solid var(--line); background:var(--panel); padding:16px 22px 20px; text-align:right; border-top:4px solid var(--signal); }
+    .time-label { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.13em; font-weight:800; }
+    .timer { font:800 clamp(40px,4vw,60px)/1.2 Arial, Helvetica,sans-serif; letter-spacing:-.06em; font-variant-numeric:tabular-nums; color:var(--text); white-space:nowrap; margin-top:5px; }
+    .timer.warning { color:var(--red); }
+    .time-module.final { border-top-color:var(--red); background:#2b2022; }
+    .time-module.final .time-label { color:#f3b1ac; }
+    .sound-button { display:block; margin:12px 0 0 auto; padding:2px 0; color:var(--muted); background:none; border:0; font-size:12px; cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
+    .sound-button:hover { color:var(--text); }
+    .progress-track { height:7px; width:100%; background:#2d353b; margin:0 0 35px; overflow:hidden; }
+    .progress-fill { height:100%; width:0; background:var(--signal); transition:width .14s ease; }
+    .challenge-panel { border:1px solid var(--line); background:var(--panel); padding:clamp(28px,4.2vw,52px); }
+    .prompt { color:var(--muted); text-transform:uppercase; letter-spacing:.12em; font-size:12px; font-weight:700; margin-bottom:22px; }
+    .problem { font:700 clamp(42px,6vw,78px)/1.18 Georgia, 'Times New Roman', serif; color:var(--text); margin:0 0 34px; letter-spacing:-.04em; overflow-wrap:anywhere; }
+    .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; }
+    .option { display:flex; align-items:center; gap:20px; min-height:92px; text-align:left; background:#222b32; color:var(--text); border:1px solid #48565e; border-radius:2px; padding:18px 21px; cursor:pointer; transition:background .1s,border-color .1s; }
+    .option:hover { border-color:var(--signal); background:#2d3941; }
+    .option:active { background:#37434b; }
+    .option-key { flex:none; width:40px; height:40px; display:inline-flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; border:1px solid #627077; color:var(--signal); }
+    .option-value { font-size:clamp(25px,2.4vw,34px); font-weight:700; font-variant-numeric:tabular-nums; }
+    .test-foot { margin-top:20px; display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap; }
+    .test-foot p { margin:0; font-size:13px; color:var(--muted); }
+    #results-screen h1 { font-size:clamp(52px,6vw,76px); margin-bottom:18px; }
+    #results-screen > p { color:var(--muted); }
+    .score-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:30px 0 30px; }
+    .score-cell { border:1px solid var(--line); background:var(--panel); min-height:145px; padding:23px 20px; }
+    .score-cell:first-child { border-top:4px solid var(--signal); }
+    .score-cell strong { display:block; font-size:clamp(35px,4vw,54px); line-height:1.2; color:var(--text); font-variant-numeric:tabular-nums; }
+    .score-cell span { display:block; margin-top:10px; color:var(--muted); font-size:13px; }
+    .result-actions { margin-top:30px; }
+    @media(max-width:860px) {
+      .container { padding:44px 25px 66px; }
+      .intro { grid-template-columns:1fr; gap:24px; padding-bottom:30px; }
+      .intro h1 { font-size:clamp(48px,9vw,70px); }
+      .hero-clock { min-height:0; padding:22px 25px; }
+      .hero-time { font-size:67px; margin:14px 0 10px; }
+      .details-area { gap:30px; }
+      .challenge-panel { padding:32px; }
+      .score-grid { grid-template-columns:1fr 1fr; }
     }
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+    @media(max-width:620px) {
+      .header-inner { min-height:64px; padding:14px 18px; }
+      .site-label { max-width:100%; font-size:14px; }
+      .lab-label { display:none; }
+      .container { padding:36px 18px 56px; }
+      .intro h1 { font-size:clamp(42px,11.5vw,56px); }
+      .intro .lead { font-size:19px; }
+      .details-area { grid-template-columns:1fr; gap:32px; }
+      .facts { grid-template-columns:repeat(3,1fr); gap:8px; }
+      .fact { display:block; border-top:1px solid var(--line); padding:12px 0; }
+      .fact:first-child { padding-top:12px; }
+      .fact-value { font-size:22px; display:block; }
+      .fact-label { text-align:left; font-size:11px; }
+      .primary { width:100%; }
+      .test-head { grid-template-columns:1fr; gap:15px; }
+      .test-head h1 { font-size:30px; }
+      .time-module { display:grid; grid-template-columns:1fr auto; grid-template-rows:auto auto; align-items:center; gap:5px 16px; text-align:left; padding:13px 16px; }
+      .time-label { grid-column:1 / -1; grid-row:1; }
+      .timer { grid-column:1; grid-row:2; font-size:42px; margin:0; }
+      .sound-button { grid-column:2; grid-row:2; margin:0; justify-self:end; white-space:nowrap; }
+      .progress-track { margin-bottom:20px; }
+      .challenge-panel { padding:24px 19px; }
+      .problem { font-size:clamp(37px,10vw,54px); margin-bottom:26px; }
+      .options { grid-template-columns:1fr; gap:10px; }
+      .option { min-height:65px; padding:10px 13px; gap:15px; }
+      .option-key { width:34px; height:34px; }
+      .option-value { font-size:27px; }
+      .test-foot { flex-direction:column; align-items:stretch; }
+      .test-foot .secondary { width:100%; }
+      .score-grid { gap:9px; }
+      .score-cell { min-height:115px; padding:17px 14px; }
+      .score-cell strong { font-size:40px; }
+      .resources { margin-top:48px; }
+      .site-footer { padding:18px; }
+    }
+    @media(prefers-reduced-motion:reduce) { *, *::before, *::after { transition:none !important; animation:none !important; } }
+
+    /* Dartmouth / Geisel institutional identity, retained on every screen. */
+    .brand-identity { display:flex; align-items:center; min-width:0; gap:13px; }
+    .brand-shield { display:block; flex:none; width:48px; height:52px; object-fit:contain; padding:5px; background:#fff; border:1px solid #d9e1de; }
+    .brand-copy { display:flex; flex-direction:column; gap:2px; min-width:0; }
+    .brand-school { color:#b7cabd; font-size:11px; line-height:1.25; font-weight:700; text-transform:uppercase; letter-spacing:.095em; }
+    .brand-copy .site-label { max-width:none; font-size:17px; font-weight:700; }
+    .brand-copy .site-label:before { display:none; }
+    .lab-label { max-width:310px; }
+    .campus-banner { position:relative; overflow:hidden; margin:-16px 0 48px; height:clamp(190px,21vw,265px); background:#19322e; border:1px solid #41534d; }
+    .campus-banner::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg, rgba(9,19,22,.77) 0%, rgba(9,19,22,.38) 55%, rgba(9,19,22,.08) 100%); pointer-events:none; }
+    .campus-banner img { display:block; height:100%; width:100%; object-fit:cover; object-position:center 48%; filter:brightness(.80) saturate(.74); }
+    .campus-label { position:absolute; z-index:1; left:clamp(24px,4vw,50px); bottom:clamp(22px,3vw,38px); max-width:480px; }
+    .campus-label .campus-overline { margin:0 0 9px; color:#e2e8e1; font-size:11px; letter-spacing:.16em; font-weight:800; text-transform:uppercase; }
+    .campus-label strong { display:block; color:#fff; font:700 clamp(23px,3.1vw,40px)/1.14 Georgia, 'Times New Roman', serif; letter-spacing:-.018em; }
+    .brand-citation { font-size:11px; color:#b1bdbc; margin-top:7px; }
+    @media(max-width:620px) {
+      .brand-shield { width:42px; height:45px; }
+      .brand-school { font-size:9px; letter-spacing:.055em; }
+      .brand-copy .site-label { font-size:13px; }
+      .campus-banner { margin:-5px 0 31px; height:180px; }
+      .campus-label { left:19px; bottom:19px; right:14px; }
+      .campus-label strong { font-size:25px; }
+    }
   </style>
 </head>
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <div class="site-label">Media and Health Behaviors Lab</div>
-      <div class="lab-label">Geisel School of Medicine at Dartmouth</div>
+      <div class="brand-identity">
+        <img class="brand-shield" src="https://alumni.dartmouth.edu/sites/default/files/2024-04/Geisel.jpg" alt="Geisel School of Medicine shield" width="48" height="52">
+        <div class="brand-copy"><span class="brand-school">Geisel School of Medicine at Dartmouth</span><span class="site-label">Media and Health Behaviors Lab</span></div>
+      </div>
+      <div class="lab-label">Research assessment · Dartmouth College</div>
     </div>
   </header>
 
   <main class="container">
     <section id="intro-screen" aria-labelledby="intro-title">
+      <div class="campus-banner" aria-label="Photograph of Baker Tower at Dartmouth College">
+        <img src="https://home.dartmouth.edu/sites/home/files/styles/max_width_720px/public/2022-01/20210104-Campus_Drone-RG-009-sharpened.jpg.webp?itok=efBCafly" alt="Baker Tower and Dartmouth campus in winter" loading="eager">
+        <div class="campus-label"><p class="campus-overline">Media and Health Behaviors Lab</p><strong>Five minutes. Stay focused.</strong></div>
+      </div>
       <div class="intro">
-        <div class="eyebrow">Online assessment</div>
-        <h1 id="intro-title">Mental Math Assessment</h1>
-        <p class="lead">A five minute arithmetic task. Answer as many questions as you can before the time runs out.</p>
+        <div class="hero-copy">
+          <div class="eyebrow">Timed cognitive task / Mental arithmetic</div>
+          <h1 id="intro-title">Mental Math Assessment</h1>
+          <p class="lead">Five minutes. One hundred questions. Work as quickly and accurately as you can.</p>
+          <p class="sublead">The clock will not pause once the assessment begins. Unanswered questions do not affect your score.</p>
+        </div>
+        <div class="hero-clock" aria-label="Assessment time limit is five minutes">
+          <span class="hero-caption">Time available</span>
+          <strong class="hero-time">05:00</strong>
+          <div class="hero-meta">Your time begins when you press Start.</div>
+        </div>
       </div>
-      <div class="facts" aria-label="Assessment details">
-        <div class="fact"><span class="fact-value">5 min</span><span class="fact-label">Time limit</span></div>
-        <div class="fact"><span class="fact-value">100</span><span class="fact-label">Maximum questions</span></div>
-        <div class="fact"><span class="fact-value">4</span><span class="fact-label">Choices per question</span></div>
-      </div>
-      <div class="instructions">
-        <h2>Instructions</h2>
-        <p>Questions cover addition, subtraction, multiplication, division, squares, percentages and mixed arithmetic.</p>
-        <p>Select one answer for each question. Correct answers receive <strong>+1 point</strong>, incorrect answers receive <strong>−1 point</strong> and unanswered questions receive <strong>0 points</strong>.</p>
-        <p>Use the mouse or keyboard keys <strong>A, B, C, D</strong> or <strong>1, 2, 3, 4</strong> to choose an answer. You can skip a question without penalty.</p>
-        <div class="start-row"><button class="primary" id="start-button" type="button">Start assessment</button></div>
-        <p class="small-note">The countdown begins when you select Start assessment.</p>
+      <div class="details-area">
+        <div class="facts" aria-label="Assessment details">
+          <div class="fact"><span class="fact-value">05:00</span><span class="fact-label">Time limit</span></div>
+          <div class="fact"><span class="fact-value">100</span><span class="fact-label">Maximum questions</span></div>
+          <div class="fact"><span class="fact-value">4</span><span class="fact-label">Choices per question</span></div>
+        </div>
+        <div class="instructions">
+          <h2>Before you begin</h2>
+          <p>Questions include addition, subtraction, multiplication, division, squares, percentages and mixed arithmetic.</p>
+          <p><strong>Correct: +1 point. Incorrect: −1 point. Unanswered: 0 points.</strong></p>
+          <p>Choose an answer with your mouse or use <strong>A, B, C, D</strong> or <strong>1, 2, 3, 4</strong> on your keyboard. You may skip any question.</p>
+          <label class="sound-setting"><input type="checkbox" id="sound-enabled" checked> Play ticking sounds during the final 20 seconds</label>
+          <div class="start-row"><button class="primary" id="start-button" type="button">Start assessment</button></div>
+          <p class="small-note">Press Start only when you are ready. The five minute countdown begins immediately.</p>
+        </div>
       </div>
     </section>
 
     <section id="test-screen" aria-labelledby="test-title" hidden>
       <div class="test-head">
         <div>
-          <div class="eyebrow">Mental math assessment</div>
+          <div class="eyebrow">Mental math / Timed session</div>
           <h1 id="test-title">Question <span id="question-number">1</span> of 100</h1>
           <div class="progress-label" id="progress-label">0 of 100 completed</div>
         </div>
-        <div class="timer" id="timer" role="timer" aria-label="Time remaining">05:00</div>
+        <div class="time-module" id="time-module">
+          <div class="time-label">Time remaining</div>
+          <div class="timer" id="timer" role="timer" aria-label="Time remaining">05:00</div>
+          <button type="button" class="sound-button" id="sound-toggle-test" aria-pressed="true">Final ticking: On</button>
+        </div>
       </div>
       <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
-      <p class="prompt" id="question-topic">Select the correct answer</p>
-      <h2 class="problem" id="question-text" tabindex="-1"></h2>
-      <div class="options" id="answer-options" role="group" aria-label="Answer choices"></div>
-      <div class="test-foot">
-        <p>Choose with A–D or 1–4 on your keyboard.</p>
-        <button class="secondary" id="skip-button" type="button">Skip question</button>
+      <div class="challenge-panel">
+        <p class="prompt" id="question-topic">Select the correct answer</p>
+        <h2 class="problem" id="question-text" tabindex="-1"></h2>
+        <div class="options" id="answer-options" role="group" aria-label="Answer choices"></div>
+        <div class="test-foot">
+          <p>Use A–D or 1–4 on your keyboard.</p>
+          <button class="secondary" id="skip-button" type="button">Skip question</button>
+        </div>
       </div>
     </section>
 
@@ -177,6 +287,7 @@
   <script>
     'use strict';
     (function () {
+      // Assessment generator, score computation, and progression are unchanged from the previous working HTML.
       const DURATION_MS = 5 * 60 * 1000;
       const MAX_QUESTIONS = 100;
       const CITATION = 'Bhat, Y. R. (2026). Mental Math Assessment (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23740026';
@@ -185,6 +296,42 @@
       const topicNames = { addition: 'Addition', subtraction: 'Subtraction', multiplication: 'Multiplication', division: 'Division', squares: 'Squares', percentages: 'Percentages', mixed: 'Mixed arithmetic' };
       let questions = [], index = 0, correct = 0, incorrect = 0, skipped = 0;
       let phase = 'intro', deadline = 0, intervalId = null, locked = false;
+      let audioContext = null, soundOn = true, lastTickSecond = null;
+      function unlockAudio() {
+        if (!soundOn) return;
+        try {
+          if (!audioContext) {
+            const Context = window.AudioContext || window.webkitAudioContext;
+            if (!Context) return;
+            audioContext = new Context();
+          }
+          if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
+        } catch (_) { /* Sound is optional: never interrupt the assessment. */ }
+      }
+      function tickSound(second) {
+        if (!soundOn || !audioContext || audioContext.state !== 'running' || phase !== 'test') return;
+        if (second <= 0 || second > 20 || lastTickSecond === second) return;
+        lastTickSecond = second;
+        try {
+          const now = audioContext.currentTime;
+          const osc = audioContext.createOscillator();
+          const gain = audioContext.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(second <= 10 ? 880 : 660, now);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.055, now + 0.008);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.075);
+          osc.connect(gain);
+          gain.connect(audioContext.destination);
+          osc.start(now);
+          osc.stop(now + 0.08);
+        } catch (_) { /* Browsers may block audio; the timer continues. */ }
+      }
+      function updateSoundButton() {
+        $('sound-enabled').checked = soundOn;
+        $('sound-toggle-test').textContent = soundOn ? 'Final ticking: On' : 'Final ticking: Off';
+        $('sound-toggle-test').setAttribute('aria-pressed', String(soundOn));
+      }
 
       const int = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
       const shuffled = arr => {
@@ -255,7 +402,9 @@
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
         $('timer').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        $('timer').classList.toggle('warning', totalSeconds <= 30);
+        $('timer').classList.toggle('warning', totalSeconds <= 20);
+        $('time-module').classList.toggle('final', totalSeconds <= 20);
+        if (totalSeconds <= 20 && totalSeconds > 0) tickSound(totalSeconds);
         if (ms <= 0 && phase === 'test') finish('time');
       }
       function renderQuestion() {
@@ -290,6 +439,10 @@
         clearInterval(intervalId);
         questions = createQuestions(); index = 0; correct = 0; incorrect = 0; skipped = 0;
         locked = false; deadline = Date.now() + DURATION_MS;
+        lastTickSecond = null;
+        soundOn = $('sound-enabled').checked;
+        updateSoundButton();
+        unlockAudio();
         show('test'); renderQuestion(); renderTimer();
         intervalId = setInterval(renderTimer, 150);
         $('question-text').focus({ preventScroll: true });
@@ -325,6 +478,16 @@
           ? 'Your five minute session is complete.'
           : 'You completed all 100 questions.';
       }
+      $('sound-enabled').addEventListener('change', e => {
+        soundOn = e.target.checked;
+        updateSoundButton();
+        if (soundOn) unlockAudio();
+      });
+      $('sound-toggle-test').addEventListener('click', () => {
+        soundOn = !soundOn;
+        updateSoundButton();
+        if (soundOn) unlockAudio();
+      });
       $('start-button').addEventListener('click', start);
       $('restart-button').addEventListener('click', start);
       $('skip-button').addEventListener('click', skip);
