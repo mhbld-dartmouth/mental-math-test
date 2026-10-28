@@ -53,6 +53,10 @@ The archived DOI identifies a specific software release. The live webpage reflec
 
 The browser interface uses `index.html` for the assessment and two small supporting files for its presentation and citation links: `theme.css` and `publication-links.js`. Neither supporting file changes question generation, timing, or scoring.
 
-## Copyright
+## License
 
-© 2026 Media and Health Behaviors Lab, Dartmouth. Consult repository licensing information before reuse or redistribution.
+The assessment software is provided under the **MIT License**, subject to authorization by its copyright holder. See the [LICENSE](LICENSE) file for the full terms. The MIT License permits use, modification, and redistribution, including commercial use, provided that the copyright and license notices are retained.
+
+The legal copyright holder must be confirmed with Dartmouth before this license is published. Software authorship and citation credit do not by themselves determine copyright ownership.
+
+If you use or adapt the assessment for research, please cite the archived version using the citation above. The request to cite is separate from the MIT License requirements.
