@@ -10,7 +10,7 @@ version: "1.0.0"
 date-released: 2026-10-28
 doi: "10.5281/zenodo.23740026"
 repository-code: "https://github.com/mhbld-dartmouth/mental-math-test"
-url: "https://doi.org/10.5281/zenodo.23740026"
+url: "https://mhbld-dartmouth.github.io/mental-math-test/"
 abstract: >-
   A browser-based, five-minute mental arithmetic assessment with randomly
   generated questions covering addition, subtraction, multiplication,
