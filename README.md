@@ -49,10 +49,6 @@ The repository's [`CITATION.cff`](CITATION.cff) also supports GitHub's **Cite th
 
 The archived DOI identifies a specific software release. The live webpage reflects the current version of the assessment and may have subsequent presentation changes. A DOI is not evidence of independent psychometric validation.
 
-## Website presentation
-
-The browser interface uses `index.html` for the assessment and two small supporting files for its presentation and citation links: `theme.css` and `publication-links.js`. Neither supporting file changes question generation, timing, or scoring.
-
 ## License
 
 The assessment software is provided under the **MIT License**, subject to authorization by its copyright holder. See the [LICENSE](LICENSE) file for the full terms. The MIT License permits use, modification, and redistribution, including commercial use, provided that the copyright and license notices are retained.
