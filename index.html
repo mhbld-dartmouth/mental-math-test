@@ -1,58 +1,353 @@
-# Mental Math Assessment
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Five minute mental arithmetic assessment developed by the Media and Health Behaviors Lab at Dartmouth.">
+  <title>Mental Math Assessment | Dartmouth</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --green: #00693e;
+      --green-dark: #004e2e;
+      --ink: #252b29;
+      --muted: #59635e;
+      --line: #d9ded9;
+      --paper: #fbfbf9;
+      --white: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.55; }
+    a { color: var(--green-dark); text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    button { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #8aae94; outline-offset: 3px; }
+    .site-header { background: var(--white); border-bottom: 4px solid var(--green); }
+    .header-inner { max-width: 960px; margin: 0 auto; padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .site-label { color: var(--green-dark); font-weight: 700; font-size: 15px; letter-spacing: .01em; }
+    .lab-label { color: var(--muted); font-size: 13px; text-align: right; }
+    .container { max-width: 840px; margin: 0 auto; padding: 48px 24px 60px; }
+    h1, h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 500; line-height: 1.15; }
+    h1 { font-size: clamp(34px, 5.5vw, 48px); letter-spacing: -.025em; margin: 0 0 18px; }
+    h2 { font-size: 27px; margin: 0 0 16px; }
+    h3 { font-size: 16px; font-weight: 700; margin: 0 0 10px; }
+    p { margin: 0 0 16px; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .14em; color: var(--green-dark); font-size: 11px; font-weight: 700; margin-bottom: 16px; }
+    .lead { font-size: 18px; max-width: 620px; color: #454e49; }
+    .intro { padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+    .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 30px 0 32px; }
+    .fact { padding: 18px 16px 18px 0; }
+    .fact + .fact { padding-left: 22px; border-left: 1px solid var(--line); }
+    .fact-value { display: block; font-size: 23px; font-weight: 700; color: var(--green-dark); }
+    .fact-label { font-size: 12px; color: var(--muted); }
+    .instructions { max-width: 670px; padding-bottom: 8px; }
+    .instructions p { margin: 0 0 10px; }
+    .primary { background: var(--green); border: 1px solid var(--green); border-radius: 4px; color: white; font-weight: 700; min-width: 170px; padding: 12px 22px; cursor: pointer; }
+    .primary:hover { background: var(--green-dark); }
+    .secondary { background: white; color: var(--green-dark); border: 1px solid var(--line); border-radius: 4px; cursor: pointer; padding: 9px 16px; }
+    .secondary:hover { border-color: var(--green); background: #f5f9f5; }
+    .start-row { margin-top: 25px; }
+    .small-note { font-size: 13px; color: var(--muted); margin-top: 11px; }
+    .resources { margin-top: 52px; padding-top: 26px; border-top: 1px solid var(--line); font-size: 14px; }
+    .resources h2 { font-family: Arial, Helvetica, sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 14px; }
+    .resource-links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 22px; }
+    .citation { border-left: 3px solid var(--green); padding: 7px 0 7px 18px; margin: 16px 0 0; color: #424b46; }
+    .citation p { margin: 0 0 10px; }
+    .meta { color: var(--muted); font-size: 13px; margin: 20px 0 0; }
+    .site-footer { max-width: 960px; margin: 0 auto; padding: 20px 24px 30px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    [hidden] { display: none !important; }
+    .test-head { display: flex; gap: 24px; justify-content: space-between; align-items: flex-start; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+    .test-head h1 { font-size: 32px; margin-bottom: 4px; }
+    .progress-label { font-size: 13px; color: var(--muted); }
+    .timer { font-variant-numeric: tabular-nums; font-size: 26px; font-weight: 700; white-space: nowrap; color: var(--green-dark); }
+    .timer.warning { color: #9c4128; }
+    .progress-track { height: 4px; background: #e4e8e3; margin: 0 0 42px; }
+    .progress-fill { background: var(--green); height: 100%; width: 0; transition: width .12s; }
+    .prompt { margin: 0 0 12px; font-size: 15px; color: var(--muted); }
+    .problem { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(31px, 6vw, 46px); font-weight: 500; line-height: 1.2; margin: 0 0 32px; }
+    .options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 620px; }
+    .option { display: flex; align-items: center; gap: 18px; text-align: left; border: 1px solid #bac7bf; background: var(--white); color: var(--ink); border-radius: 4px; min-height: 74px; padding: 14px 17px; cursor: pointer; }
+    .option:hover { border-color: var(--green); background: #f4f8f5; }
+    .option-key { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 30px; width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 3px; font-size: 13px; font-weight: 700; color: var(--green-dark); }
+    .option-value { font-size: 23px; font-variant-numeric: tabular-nums; }
+    .test-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 28px; max-width: 620px; }
+    .test-foot p { margin: 0; font-size: 13px; color: var(--muted); }
+    .score-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 26px 0 34px; }
+    .score-cell { padding: 18px 14px; background: white; border: 1px solid var(--line); }
+    .score-cell strong { display: block; color: var(--green-dark); font-size: 28px; font-variant-numeric: tabular-nums; }
+    .score-cell span { display: block; font-size: 12px; color: var(--muted); }
+    .result-actions { margin: 24px 0 0; }
+    @media (max-width: 580px) {
+      .header-inner { padding: 18px 18px; }
+      .lab-label { display: none; }
+      .container { padding: 34px 18px 46px; }
+      .facts { grid-template-columns: 1fr 1fr 1fr; }
+      .fact { padding: 15px 8px 15px 0; }
+      .fact + .fact { padding-left: 10px; }
+      .fact-value { font-size: 20px; }
+      .options { grid-template-columns: 1fr; }
+      .option { min-height: 60px; }
+      .score-grid { grid-template-columns: 1fr 1fr; }
+      .test-head h1 { font-size: 27px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-label">Media and Health Behaviors Lab</div>
+      <div class="lab-label">Geisel School of Medicine at Dartmouth</div>
+    </div>
+  </header>
 
-A five-minute browser-based mental arithmetic assessment developed by the Media and Health Behaviors Lab at Dartmouth's Geisel School of Medicine.
+  <main class="container">
+    <section id="intro-screen" aria-labelledby="intro-title">
+      <div class="intro">
+        <div class="eyebrow">Online assessment</div>
+        <h1 id="intro-title">Mental Math Assessment</h1>
+        <p class="lead">A five minute arithmetic task. Answer as many questions as you can before the time runs out.</p>
+      </div>
+      <div class="facts" aria-label="Assessment details">
+        <div class="fact"><span class="fact-value">5 min</span><span class="fact-label">Time limit</span></div>
+        <div class="fact"><span class="fact-value">100</span><span class="fact-label">Maximum questions</span></div>
+        <div class="fact"><span class="fact-value">4</span><span class="fact-label">Choices per question</span></div>
+      </div>
+      <div class="instructions">
+        <h2>Instructions</h2>
+        <p>Questions cover addition, subtraction, multiplication, division, squares, percentages and mixed arithmetic.</p>
+        <p>Select one answer for each question. Correct answers receive <strong>+1 point</strong>, incorrect answers receive <strong>−1 point</strong> and unanswered questions receive <strong>0 points</strong>.</p>
+        <p>Use the mouse or keyboard keys <strong>A, B, C, D</strong> or <strong>1, 2, 3, 4</strong> to choose an answer. You can skip a question without penalty.</p>
+        <div class="start-row"><button class="primary" id="start-button" type="button">Start assessment</button></div>
+        <p class="small-note">The countdown begins when you select Start assessment.</p>
+      </div>
+    </section>
 
-## Open the assessment and resources
+    <section id="test-screen" aria-labelledby="test-title" hidden>
+      <div class="test-head">
+        <div>
+          <div class="eyebrow">Mental math assessment</div>
+          <h1 id="test-title">Question <span id="question-number">1</span> of 100</h1>
+          <div class="progress-label" id="progress-label">0 of 100 completed</div>
+        </div>
+        <div class="timer" id="timer" role="timer" aria-label="Time remaining">05:00</div>
+      </div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="prompt" id="question-topic">Select the correct answer</p>
+      <h2 class="problem" id="question-text" tabindex="-1"></h2>
+      <div class="options" id="answer-options" role="group" aria-label="Answer choices"></div>
+      <div class="test-foot">
+        <p>Choose with A–D or 1–4 on your keyboard.</p>
+        <button class="secondary" id="skip-button" type="button">Skip question</button>
+      </div>
+    </section>
 
-**[Open the live Mental Math Assessment](https://mhbld-dartmouth.github.io/mental-math-test/)**
+    <section id="results-screen" aria-labelledby="results-title" hidden>
+      <div class="eyebrow">Assessment complete</div>
+      <h1 id="results-title">Your results</h1>
+      <p id="finish-reason">Your five minute session is complete.</p>
+      <div class="score-grid">
+        <div class="score-cell"><strong id="final-score">0</strong><span>Total score</span></div>
+        <div class="score-cell"><strong id="correct-count">0</strong><span>Correct</span></div>
+        <div class="score-cell"><strong id="incorrect-count">0</strong><span>Incorrect</span></div>
+        <div class="score-cell"><strong id="unanswered-count">0</strong><span>Unanswered</span></div>
+      </div>
+      <p class="small-note">Score = correct answers minus incorrect answers. Unanswered questions have no penalty.</p>
+      <div class="result-actions"><button class="primary" type="button" id="restart-button">Take assessment again</button></div>
+    </section>
 
-**[View the source code on GitHub](https://github.com/mhbld-dartmouth/mental-math-test)**
+    <section class="resources" id="publication-resources" aria-labelledby="resources-title">
+      <h2 id="resources-title">Assessment and research resources</h2>
+      <nav class="resource-links" aria-label="Related resources">
+        <a href="https://mhbld-dartmouth.github.io/mental-math-test/">Live assessment</a>
+        <a href="https://github.com/mhbld-dartmouth/mental-math-test">GitHub source code</a>
+        <a href="https://doi.org/10.5281/zenodo.23740026">Zenodo DOI and archive</a>
+      </nav>
+      <div class="citation">
+        <h3>How to cite</h3>
+        <p>Bhat, Y. R. (2026). <em>Mental Math Assessment</em> (Version 1.0.0) [Computer software]. Zenodo. <a href="https://doi.org/10.5281/zenodo.23740026">https://doi.org/10.5281/zenodo.23740026</a></p>
+        <button class="secondary" type="button" id="copy-citation">Copy citation</button>
+        <span id="copy-status" aria-live="polite" class="small-note" style="margin-left: 10px;"></span>
+      </div>
+      <div class="meta">Developer: Yashaswini Rajendra Bhat<br>Principal Investigator: Diane Gilbert-Diamond, PhD<br>Geisel School of Medicine at Dartmouth</div>
+    </section>
+  </main>
+  <footer class="site-footer">Media and Health Behaviors Lab · Geisel School of Medicine at Dartmouth · <a href="https://github.com/mhbld-dartmouth/mental-math-test/blob/main/LICENSE">Software license</a></footer>
 
-**[View the archived release and DOI on Zenodo](https://doi.org/10.5281/zenodo.23740026)**
+  <script>
+    'use strict';
+    (function () {
+      const DURATION_MS = 5 * 60 * 1000;
+      const MAX_QUESTIONS = 100;
+      const CITATION = 'Bhat, Y. R. (2026). Mental Math Assessment (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23740026';
+      const $ = id => document.getElementById(id);
+      const screens = { intro: $('intro-screen'), test: $('test-screen'), results: $('results-screen') };
+      const topicNames = { addition: 'Addition', subtraction: 'Subtraction', multiplication: 'Multiplication', division: 'Division', squares: 'Squares', percentages: 'Percentages', mixed: 'Mixed arithmetic' };
+      let questions = [], index = 0, correct = 0, incorrect = 0, skipped = 0;
+      let phase = 'intro', deadline = 0, intervalId = null, locked = false;
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23740026.svg)](https://doi.org/10.5281/zenodo.23740026)
-
-## About the assessment
-
-The Mental Math Assessment presents up to 100 randomly generated arithmetic questions during a five-minute session. It is intended to measure performance on this arithmetic task. No account or software installation is required.
-
-To take the test, open the [assessment webpage](https://mhbld-dartmouth.github.io/mental-math-test/), read the instructions, and select **Start Test**. Respond to as many questions as possible before the timer ends. The final score appears on the results screen. Keyboard shortcuts **A, B, C, D** or **1, 2, 3, 4** can be used to choose answers.
-
-| Feature | Details |
-| --- | --- |
-| Duration | 5 minutes |
-| Questions | Up to 100 randomly generated questions |
-| Question types | Addition, subtraction, multiplication, division, squares, percentages, and mixed operations |
-| Correct answer | +1 point |
-| Incorrect answer | −1 point |
-| Unanswered question | 0 points |
-
-## Citation
-
-Please cite the archived software if you use or adapt this assessment:
-
-> Bhat, Y. R. (2026). *Mental Math Assessment* (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23740026
-
-**Full creator name:** Yashaswini Rajendra Bhat  
-**DOI:** [10.5281/zenodo.23740026](https://doi.org/10.5281/zenodo.23740026)  
-**Live assessment:** https://mhbld-dartmouth.github.io/mental-math-test/  
-**Source code:** https://github.com/mhbld-dartmouth/mental-math-test
-
-The repository's [`CITATION.cff`](CITATION.cff) also supports GitHub's **Cite this repository** option.
-
-## Research and development
-
-**Developer and software citation author:** Yashaswini Rajendra Bhat  
-**Principal investigator:** Diane Gilbert-Diamond, PhD  
-**Lab:** Media and Health Behaviors Lab  
-**Institution:** Geisel School of Medicine at Dartmouth
-
-The archived DOI identifies a specific software release. The live webpage reflects the current version of the assessment and may have subsequent presentation changes. A DOI is not evidence of independent psychometric validation.
-
-## Website presentation
-
-The browser interface uses `index.html` for the assessment and two small supporting files for its presentation and citation links: `theme.css` and `publication-links.js`. Neither supporting file changes question generation, timing, or scoring.
-
-## Copyright
-
-© 2026 Media and Health Behaviors Lab, Dartmouth. Consult repository licensing information before reuse or redistribution.
+      const int = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+      const shuffled = arr => {
+        const copy = arr.slice();
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = int(0, i);
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      };
+      function buildQuestion(type) {
+        let text, answer;
+        const a = int(10, 79), b = int(2, 28);
+        switch (type) {
+          case 'addition':
+            text = `${a} + ${b} = ?`; answer = a + b; break;
+          case 'subtraction': {
+            const larger = a + int(8, 40);
+            text = `${larger} − ${a} = ?`; answer = larger - a; break;
+          }
+          case 'multiplication': {
+            const x = int(3, 14), y = int(3, 12);
+            text = `${x} × ${y} = ?`; answer = x * y; break;
+          }
+          case 'division': {
+            const divisor = int(2, 12), quotient = int(3, 15);
+            text = `${divisor * quotient} ÷ ${divisor} = ?`; answer = quotient; break;
+          }
+          case 'squares': {
+            const n = int(4, 18);
+            text = `${n}² = ?`; answer = n * n; break;
+          }
+          case 'percentages': {
+            const pct = [10, 20, 25, 50, 75][int(0, 4)];
+            const base = int(3, 24) * 20;
+            text = `${pct}% of ${base} = ?`; answer = (pct * base) / 100; break;
+          }
+          default: {
+            const x = int(3, 18), y = int(2, 11), z = int(2, 8);
+            if (Math.random() < 0.5) { text = `(${x} + ${y}) × ${z} = ?`; answer = (x + y) * z; }
+            else { text = `${x} × ${y} − ${z} = ?`; answer = x * y - z; }
+          }
+        }
+        const values = new Set([answer]);
+        let tries = 0;
+        while (values.size < 4 && tries++ < 100) {
+          const offset = int(1, Math.max(6, Math.round(Math.abs(answer) * 0.16))) * (Math.random() < 0.5 ? -1 : 1);
+          const candidate = answer + offset;
+          if (candidate >= 0) values.add(candidate);
+        }
+        for (let x = 1; values.size < 4; x++) values.add(answer + x * 2 + 3);
+        return { type, text, answer, choices: shuffled(Array.from(values)) };
+      }
+      function createQuestions() {
+        const types = Object.keys(topicNames);
+        return shuffled(Array.from({ length: MAX_QUESTIONS }, (_, i) => types[i % types.length]))
+          .map(type => buildQuestion(type));
+      }
+      function show(screen) {
+        Object.keys(screens).forEach(name => { screens[name].hidden = name !== screen; });
+        $('publication-resources').hidden = screen === 'test';
+        phase = screen;
+      }
+      function timeLeft() { return Math.max(0, deadline - Date.now()); }
+      function renderTimer() {
+        const ms = timeLeft();
+        const totalSeconds = Math.ceil(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        $('timer').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        $('timer').classList.toggle('warning', totalSeconds <= 30);
+        if (ms <= 0 && phase === 'test') finish('time');
+      }
+      function renderQuestion() {
+        if (phase !== 'test') return;
+        if (index >= questions.length) { finish('questions'); return; }
+        const q = questions[index];
+        $('question-number').textContent = String(index + 1);
+        $('progress-label').textContent = `${index} of ${MAX_QUESTIONS} completed`;
+        $('progress-fill').style.width = `${(index / MAX_QUESTIONS) * 100}%`;
+        $('question-topic').textContent = topicNames[q.type];
+        $('question-text').textContent = q.text;
+        const options = $('answer-options');
+        options.replaceChildren();
+        q.choices.forEach((value, choiceIndex) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'option';
+          button.setAttribute('aria-label', `Option ${'ABCD'[choiceIndex]}: ${value}`);
+          const key = document.createElement('span');
+          key.className = 'option-key';
+          key.setAttribute('aria-hidden', 'true');
+          key.textContent = 'ABCD'[choiceIndex];
+          const number = document.createElement('span');
+          number.className = 'option-value';
+          number.textContent = String(value);
+          button.append(key, number);
+          button.addEventListener('click', () => choose(choiceIndex));
+          options.append(button);
+        });
+      }
+      function start() {
+        clearInterval(intervalId);
+        questions = createQuestions(); index = 0; correct = 0; incorrect = 0; skipped = 0;
+        locked = false; deadline = Date.now() + DURATION_MS;
+        show('test'); renderQuestion(); renderTimer();
+        intervalId = setInterval(renderTimer, 150);
+        $('question-text').focus({ preventScroll: true });
+      }
+      function choose(choiceIndex) {
+        if (phase !== 'test' || locked) return;
+        if (timeLeft() <= 0) { finish('time'); return; }
+        locked = true;
+        const q = questions[index];
+        if (q.choices[choiceIndex] === q.answer) correct++;
+        else incorrect++;
+        index++;
+        locked = false;
+        renderQuestion();
+      }
+      function skip() {
+        if (phase !== 'test' || locked) return;
+        if (timeLeft() <= 0) { finish('time'); return; }
+        skipped++;
+        index++;
+        renderQuestion();
+      }
+      function finish(reason) {
+        if (phase !== 'test') return;
+        clearInterval(intervalId); intervalId = null;
+        show('results');
+        const unanswered = MAX_QUESTIONS - correct - incorrect;
+        $('final-score').textContent = String(correct - incorrect);
+        $('correct-count').textContent = String(correct);
+        $('incorrect-count').textContent = String(incorrect);
+        $('unanswered-count').textContent = String(unanswered);
+        $('finish-reason').textContent = reason === 'time'
+          ? 'Your five minute session is complete.'
+          : 'You completed all 100 questions.';
+      }
+      $('start-button').addEventListener('click', start);
+      $('restart-button').addEventListener('click', start);
+      $('skip-button').addEventListener('click', skip);
+      document.addEventListener('keydown', e => {
+        if (phase !== 'test' || e.altKey || e.ctrlKey || e.metaKey || e.repeat) return;
+        if (e.target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
+        const key = e.key.toUpperCase();
+        const indexByKey = { A: 0, B: 1, C: 2, D: 3, '1': 0, '2': 1, '3': 2, '4': 3 };
+        if (Object.prototype.hasOwnProperty.call(indexByKey, key)) {
+          e.preventDefault(); choose(indexByKey[key]);
+        }
+      });
+      $('copy-citation').addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(CITATION);
+          $('copy-status').textContent = 'Copied';
+        } catch (_) {
+          $('copy-status').textContent = 'Select the citation text above to copy.';
+        }
+      });
+      window.addEventListener('visibilitychange', () => { if (phase === 'test') renderTimer(); });
+      show('intro');
+    })();
+  </script>
+</body>
+</html>
