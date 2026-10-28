@@ -1,62 +1,58 @@
-# 🧮 Mental Math Assessment
+# Mental Math Assessment
 
-<div align="center">
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23740026.svg)](https://doi.org/10.5281/zenodo.23740026)
 
-![Dartmouth Geisel School of Medicine](https://img.shields.io/badge/Dartmouth-Geisel%20School%20of%20Medicine-00693E?style=for-the-badge)
-![Media & Health Behaviors Lab](https://img.shields.io/badge/Media%20%26%20Health%20Behaviors%20Lab-00693E?style=for-the-badge)
+A browser-based, timed mental arithmetic assessment developed by the Media and Health Behaviors Lab at Dartmouth's Geisel School of Medicine.
 
-**A timed mental arithmetic assessment**
+**Source code:** https://github.com/mhbld-dartmouth/mental-math-test  
+**Archived software (version 1.0.0):** https://doi.org/10.5281/zenodo.23740026
 
-*Developed by the Media and Health Behaviors Lab, Dartmouth Geisel School of Medicine*
+## About
 
----
+The Mental Math Assessment presents randomly generated arithmetic questions in a timed browser interface. It is intended to measure performance on the arithmetic task, including the number of correct and incorrect answers. The assessment does not require an account or software installation.
 
-</div>
+## Taking the assessment
 
-## ✨ About
+1. Open the assessment link provided by the research team, or open `index.html` locally in a web browser.
+2. Read the instructions on the start screen.
+3. Select **Start Test** when ready.
+4. Answer as many questions as possible within five minutes.
+5. View the final score at the end.
 
-This is a browser-based mental math test designed to assess baseline arithmetic speed and accuracy. No installation, no login — just open and go.
+The interface supports keyboard shortcuts: **A**, **B**, **C**, **D**, or **1**, **2**, **3**, **4** to select answers.
 
----
+## Assessment details
 
-## 🚀 Taking the Test
+| Feature | Description |
+| --- | --- |
+| Time limit | 5 minutes |
+| Questions | 100 randomly generated questions |
+| Question types | Addition, subtraction, multiplication, division, squares, percentages, and mixed operations |
+| Correct answer | +1 point |
+| Incorrect answer | −1 point |
+| Unanswered question | 0 points |
 
-1. Open the link shared with you
-2. Read the instructions on the start screen
-3. Click **Start Test** when you're ready
-4. Answer as many of the **100 questions** as you can in **5 minutes**
-5. Your final score will be displayed at the end
+## Research and development
 
----
+This assessment was developed within the Media and Health Behaviors Lab at Dartmouth's Geisel School of Medicine.
 
-## 📋 How It Works
+**Principal investigator:** Diane Gilbert-Diamond, PhD  
+**Developer:** Yashaswini Rajendra Bhat  
+**Institution:** Geisel School of Medicine at Dartmouth
 
-| | |
-|---|---|
-| ⏱️ **Time limit** | 5 minutes |
-| 🔢 **Questions** | 100 |
-| ✅ **Correct answer** | +1 point |
-| ❌ **Wrong answer** | −1 point |
-| ⬜ **Unanswered** | 0 points |
+This repository provides the assessment software. The presence of a DOI does not imply that the assessment has undergone independent psychometric validation.
 
-Questions cover addition, subtraction, multiplication, division, squares, percentages, and mixed operations. Each question is randomly generated.
+## Citation
 
-> 💡 **Tip:** You can use keyboard shortcuts — press **A, B, C, D** or **1, 2, 3, 4** to select answers without clicking.
+If you use or adapt this software for research, please cite the archived version:
 
----
+> Bhat, Y. R. (2026). *Mental Math Assessment* (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23740026
 
-## 🔬 Research Context
+You can also use the repository's [`CITATION.cff`](CITATION.cff) file to generate a citation through GitHub's **Cite this repository** option.
 
-This assessment is part of research conducted at the **Media and Health Behaviors Lab** at Dartmouth's Geisel School of Medicine, led by 
+**DOI:** [10.5281/zenodo.23740026](https://doi.org/10.5281/zenodo.23740026)  
+**GitHub repository:** [mhbld-dartmouth/mental-math-test](https://github.com/mhbld-dartmouth/mental-math-test)
 
-*PI: Diane Gilbert-Diamond*.
+## Copyright
 
-*Developer: Yashaswini Rajendra Bhat*
-
----
-
-<div align="center">
-
-© 2026 [Media & Health Behaviors Lab, Dartmouth](https://geiselmed.dartmouth.edu/mhbld/)
-
-</div>
+© 2026 Media and Health Behaviors Lab, Dartmouth. For reuse permissions and licensing, refer to the repository's published license terms, if available.
