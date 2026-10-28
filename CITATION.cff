@@ -6,7 +6,7 @@ authors:
   - family-names: "Bhat"
     given-names: "Yashaswini Rajendra"
     affiliation: "Geisel School of Medicine at Dartmouth"
-version: "1.0.0"
+version: "1.0.1"
 date-released: 2026-10-28
 doi: "10.5281/zenodo.23740026"
 repository-code: "https://github.com/mhbld-dartmouth/mental-math-test"
